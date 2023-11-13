@@ -43,12 +43,6 @@ def luckyNumber(a, b):
         return random.randint(b, a + 1)
 
 print("Lucky Calculator!\n")
-# TODO:# Assignment #2 Lucky Calculator
-# This assignment requires creating a Python program that acts as a calculator and can also generate lucky numbers.
-print("By: <Tirtho Roy>")
-print("[COM S 127 <section 4>]\n")
-
-
 print("What would you like to do?\n")
 choice = input("[c]alculator, [l]ucky number, [q]uit: ")
 print()
