@@ -1,71 +1,88 @@
 import random
 
-def get_integer_input(prompt):
-    while True:
-        try:
-            value = int(input(prompt))
-            return value
-        except ValueError:
-            print("ERROR: Invalid input. Please enter an integer.")
-def perform_calculation(operator, a, b):
-    if operator == '+':
-        return a + b
-    elif operator == '-':
-        return a - b
-    elif operator == '*':
-        return a * b
-    elif operator == '/':
-        if b == 0:
-            print("ERROR: Division by zero. Changing the right-hand term to 1.")
-            b = 1
-        return a / b
-    elif operator == '//':
-        if b == 0:
-            print("ERROR: Floor division by zero. Changing the right-hand term to 1.")
-            b = 1
-        return a // b
-    elif operator == '%':
-        if b == 0:
-            print("ERROR: Modulus by zero. Changing the right-hand term to 1.")
-            b = 1
-        return a % b
-    elif operator == '**':
-        return a ** b
-    else:
-        print("ERROR: Invalid operator. Please enter '+', '-', '*', '/', '//', '%', or '**'")
-        return None
+
+def getInput():
+    num1 = int(input("Enter first number: "))
+    num2 = int(input("Enter second number: "))
+    return num1, num2
+
+def add(num1, num2):
+    return num1 + num2
+
+def subtract(num1, num2):
+    return num1 - num2
+
+def multiply(num1, num2):
+    return num1 * num2
+
+def divide(num1, num2):
+    if num2 == 0:
+        print("Error: Division by zero. Setting divisor to 1.")
+        num2 = 1
+    return num1 / num2
+
+def floor_divide(num1, num2):
+    if num2 == 0:
+        print("Error: Division by zero. Setting divisor to 1.")
+        num2 = 1
+    return num1 // num2
+
+def modulus(num1, num2):
+    if num2 == 0:
+        print("Error: Division by zero. Setting divisor to 1.")
+        num2 = 1
+    return num1 % num2
+
+def exponentiate(num1, num2):
+    return num1 ** num2
+
+def luckyNumber(low, high):
+    return random.randint(low, high)
 
 
-def luckyNumber(a, b):
-    if a < b:
-        return random.randint(a, b + 1)
-    else:
-        return random.randint(b, a + 1)
-
-print("Lucky Calculator!\n")
-print("What would you like to do?\n")
-choice = input("[c]alculator, [l]ucky number, [q]uit: ")
+print("Lucky Calculator!")
+print("By: <Tirtho Roy>")
+print("[COM S 127 <section>]")
 print()
 
-if choice == 'c':
-   
-    calculation = input("Please Choose a Calculation [+], [-], [*], [/], [//], [%], [**]: ")
-    left_term = get_integer_input("Please Enter An Integer: ")
-    right_term = get_integer_input("Please Enter An Integer: ")
+while True:
+    print("What would you like to do?")
+    print("[c]alculator, [l]ucky number, or [q]uit")
+    choice = input().lower()
 
-    result = perform_calculation(calculation, left_term, right_term)
-    if result is not None:
-        print("The result of your calculation was:", result)
-elif choice == 'l':
-    
-    left_term = get_integer_input("Please Enter An Integer: ")
-    right_term = get_integer_input("Please Enter An Integer: ")
+    if choice == 'c':
+        operation = input("Enter operation (+, -, *, /, //, %, **): ")
+        if operation not in ['+', '-', '*', '/', '//', '%', '**']:
+            print("Invalid operation!")
+            continue
 
-    lucky_num = luckyNumber(left_term, right_term)
-    print("Your lucky number is:", lucky_num)
-elif choice == 'q':
-    
-    print("Goodbye!")
-else:
-    print("ERROR: I did not understand your input... Please try again...")
+        num1, num2 = getInput()
+        if operation == '+':
+            result = add(num1, num2)
+        elif operation == '-':
+            result = subtract(num1, num2)
+        elif operation == '*':
+            result = multiply(num1, num2)
+        elif operation == '/':
+            result = divide(num1, num2)
+        elif operation == '//':
+            result = floor_divide(num1, num2)
+        elif operation == '%':
+            result = modulus(num1, num2)
+        elif operation == '**':
+            result = exponentiate(num1, num2)
+
+        print("Result:", result)
+
+    elif choice == 'l':
+        low = int(input("Enter the lower bound: "))
+        high = int(input("Enter the upper bound: "))
+        print("Your lucky number is:", luckyNumber(low, high))
+
+    elif choice == 'q':
+        print("Exiting the program. Goodbye!")
+        break
+
+    else:
+        print("Invalid choice! Please enter 'c', 'l', or 'q'.")
 
